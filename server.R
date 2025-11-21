@@ -60,7 +60,8 @@ server <- function(input, output) {
       tidyr::pivot_longer(-Category, names_to = "SMART", values_to = "NumberInds") |>
       ggplot2::ggplot(ggplot2::aes(x = Category, y=NumberInds, fill=SMART)) +
       ggplot2::geom_bar(position="identity", stat = "identity") +
-      ggplot2::coord_flip()
+      ggplot2::coord_flip() +
+      ggplot2::scale_fill_manual(values = c("SMARTInds" = 'palegreen', "IndCount" = "grey"))
   })
  
   output$smarttable <- renderDataTable({
