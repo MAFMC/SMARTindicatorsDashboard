@@ -43,9 +43,20 @@ dashboardPage(
                )
       ),
       tabItem("category",
-              numericInput("maxrows", "Rows to show", 25),
-              verbatimTextOutput("rawtable"),
-              downloadButton("downloadCsv", "Download as CSV")
+              fluidRow(
+                box(
+                  selectInput("selectcat", label = h3("Select a Category to Display"), 
+                              choices = unique(dummydat$Category), 
+                              selected = 1)
+                )
+              ),
+              fluidRow(
+                box(
+                  width = 12, status = "info", solidHeader = TRUE,
+                  title = "SMART Scores by indicator",
+                  plotOutput("catfig", width = "100%", height = 600)
+                )
+              )
       ),
       tabItem("timing",
               numericInput("maxrows", "Rows to show", 25),

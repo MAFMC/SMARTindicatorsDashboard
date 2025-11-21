@@ -80,6 +80,14 @@ server <- function(input, output) {
   
 # category statistics
   
+  output$catfig <- renderPlot({
+    dummydat |>
+      dplyr::filter(Category == input$selectcat) |>
+      ggplot2::ggplot(ggplot2::aes(x=Indicator, y=SMARTRate)) +
+      ggplot2::geom_bar(stat = "identity") +
+      ggplot2::geom_hline(yintercept = input$smartThreshold, colour='palegreen') +
+      ggplot2::ggtitle(paste(input$selectcat))
+  })
   
 # select time frame or area to id indicators
   
