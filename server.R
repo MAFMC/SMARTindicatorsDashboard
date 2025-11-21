@@ -55,9 +55,11 @@ server <- function(input, output) {
   output$catindcount <- renderPlot({
     dummydat |>
       dplyr::group_by(Category) |>
-      dplyr::summarise(IndCount = n()) |>
-      ggplot2::ggplot(ggplot2::aes(x = Category, y=IndCount)) +
-      ggplot2::geom_bar(stat = "identity") +
+      dplyr::summarise(IndCount = n(),
+                       SMARTInds = sum(SMARTRate > input$smartThreshold)) |>
+      tidyr::pivot_longer(-Category, names_to = "SMART", values_to = "NumberInds") |>
+      ggplot2::ggplot(ggplot2::aes(x = Category, y=NumberInds, fill=SMART)) +
+      ggplot2::geom_bar(position="identity", stat = "identity") +
       ggplot2::coord_flip()
   })
  

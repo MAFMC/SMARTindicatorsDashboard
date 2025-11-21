@@ -25,13 +25,17 @@ within a SMART framework: are the indicators Specific, Measurable, Achievable, R
 
 ## How to use the application
 
-Select a level of SMART for indicators to see how many meet that threshold above
+Select a SMART level for indicators in the left panel to see how many meet that threshold above. They are highlighted in green in the table. The figure gives a count of indicators by category. 
+
+The Category page gives more details on indicators within your chosen category. 
 
 On the other pages, dive into particular attributes.
 
-Do you need annual data for a routine management application? Filter indicators to see which ones are updated annually on the Timing page
+Do you need annual indicators for a routine management application? Filter indicators to see which ones are updated annually on the Timing page.
 
-Do you need data for a particular area at a certain scale? Filter indicators to see which cover your EPU or area on the Spatial page
+Do you need indicators for a particular area at a certain scale? Filter indicators to see which cover your EPU or area on the Spatial page.
 
-Do you have a particular management decision in mind? Filter indicators by potential linkages to management on the Management page
+Do you have a particular management decision in mind? Filter indicators by potential linkages to management on the Management page.
+
+Links to source information for particular indicators are given on the Details page.
 

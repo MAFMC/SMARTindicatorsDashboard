@@ -9,6 +9,9 @@ dashboardPage(
     sidebarMenu(
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
       menuItem("Category", tabName = "category", icon = icon("object-group")),
+      menuItem("Timing", tabName = "timing", icon = icon("calendar")),
+      menuItem("Spatial", tabName = "spatial", icon = icon("globe")),
+      menuItem("Management", tabName = "management", icon = icon("bars-progress")),
       menuItem("Details", tabName = "details", icon = icon("magnifying-glass-chart")),
       menuItem("About", tabName = "about", icon = icon("glasses"))
     )
@@ -40,6 +43,21 @@ dashboardPage(
                )
       ),
       tabItem("category",
+              numericInput("maxrows", "Rows to show", 25),
+              verbatimTextOutput("rawtable"),
+              downloadButton("downloadCsv", "Download as CSV")
+      ),
+      tabItem("timing",
+              numericInput("maxrows", "Rows to show", 25),
+              verbatimTextOutput("rawtable"),
+              downloadButton("downloadCsv", "Download as CSV")
+      ),
+      tabItem("spatial",
+              numericInput("maxrows", "Rows to show", 25),
+              verbatimTextOutput("rawtable"),
+              downloadButton("downloadCsv", "Download as CSV")
+      ),
+      tabItem("management",
               numericInput("maxrows", "Rows to show", 25),
               verbatimTextOutput("rawtable"),
               downloadButton("downloadCsv", "Download as CSV")

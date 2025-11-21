@@ -27,7 +27,11 @@ within a SMART framework: are the indicators Specific, Measurable, Achievable, R
 
 How did we find and describe the indicators
 
-How did we estimate the SMART rating
+How are the categories defined
+
+How did we estimate the overall SMART rating
+
+How did we determine spatial, temporal, and management linkages
 
 
 
