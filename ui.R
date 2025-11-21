@@ -9,7 +9,8 @@ dashboardPage(
     sidebarMenu(
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
       menuItem("Category", tabName = "category", icon = icon("object-group")),
-      menuItem("Details", tabName = "details", icon = icon("magnifying-glass-chart"))
+      menuItem("Details", tabName = "details", icon = icon("magnifying-glass-chart")),
+      menuItem("About", tabName = "about", icon = icon("glasses"))
     )
   ),
   dashboardBody(
@@ -20,7 +21,12 @@ dashboardPage(
                 valueBoxOutput("nindicators"),
                 valueBoxOutput("nsmart")
               ),
-               fluidRow(
+              fluidRow(
+                box(width = 12, status = "primary",
+                  uiOutput("getting_started")
+                )
+              ),
+              fluidRow(
                  box(
                    width = 6, status = "info", solidHeader = TRUE,
                    title = "Number of Indicators by Category",
@@ -42,6 +48,28 @@ dashboardPage(
               numericInput("maxrows", "Rows to show", 25),
               verbatimTextOutput("rawtable"),
               downloadButton("downloadCsv", "Download as CSV")
+      ),
+      tabItem(tabName = 'about',
+              h1("About SMART Indicators", align="center"),
+              fluidRow(
+                box(width = 9, status = "primary",
+                    uiOutput('aboutSMART'),
+                ),
+                
+                box(title = "Development Team",
+                    width = 3, status = "primary",
+                    
+                    p("- Sarah Gaichas"),
+                    p("- add names"),
+                    br(),
+                    p("For more information about the Mid-Atlantic Council please check",
+                      "out our website at",
+                      a("https://www.mafmc.org/", href = "https://www.mafmc.org/")),
+                    br(),
+                    p("All code for this project are publically available on",
+                      a("GitHub.", href = "https://github.com/MAFMC/SMARTindicatorsDashboard"))
+                )
+              )
       )
       
     )

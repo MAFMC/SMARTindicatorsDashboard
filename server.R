@@ -12,6 +12,8 @@ server <- function(input, output) {
                          SMARTRate = c(runif(26))
   )
   
+# dashboard
+  
   output$ncategories <- renderValueBox({
     # count number of categories in the indicator database.
     ncategories <- length(unique(dummydat$Category))
@@ -73,5 +75,30 @@ server <- function(input, output) {
     )
   })
   
+# category statistics
+  
+  
+# select time frame or area to id indicators
+  
+  
+# later: select decision or decision type  
+  
+  
+# links to detailed pages by indicator  
+  
+# rendered pages
+  output$aboutSMART <- renderUI({
+    withMathJax({
+      k = knitr::knit(input = "AboutSMART.Rmd", quiet = T)
+      HTML(markdown::markdownToHTML(k, fragment.only = T))
+    })
+  })
+  
+  output$getting_started <- renderUI({
+    withMathJax({
+      k = knitr::knit(input = "GettingStarted.Rmd", quiet = T)
+      HTML(markdown::markdownToHTML(k, fragment.only = T))
+    })
+  })
   
 }
