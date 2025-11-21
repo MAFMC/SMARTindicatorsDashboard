@@ -1,8 +1,9 @@
 # user interface definition for dashboard
 dashboardPage(
-  dashboardHeader(title = "SMART Indicator Summary"),
+  dashboardHeader(title = "SMART Indicator Summary",
+                  titleWidth = 300),
   dashboardSidebar(
-    sliderInput("smartThreshold", "Select SMART threshold",
+    sliderInput("smartThreshold", "Select SMART Threshold",
                 min = 0, max = 1, value = 0.5, step = 0.01
     ),
     sidebarMenu(
@@ -21,14 +22,14 @@ dashboardPage(
               ),
                fluidRow(
                  box(
-                   width = 8, status = "info", solidHeader = TRUE,
+                   width = 6, status = "info", solidHeader = TRUE,
                    title = "Number of Indicators by Category",
                    plotOutput("catindcount", width = "100%", height = 600)
                  ),
                  box(
-                   width = 4, status = "info",
-                   title = "SMART ratings breakdown",
-                   tableOutput("smarttable")
+                   width = 6, status = "info",
+                   title = "Indicator SMART Ratings",
+                   dataTableOutput("smarttable")
                  )
                )
       ),

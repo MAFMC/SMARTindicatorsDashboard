@@ -59,8 +59,18 @@ server <- function(input, output) {
       ggplot2::coord_flip()
   })
  
-  output$smarttable <- renderTable({
-    dummydat 
+  output$smarttable <- renderDataTable({
+    #dummydat
+    DT::datatable(dummydat,
+                  options = list(pageLength = nrow(dummydat),
+                                 dom = 'tipr')) |>
+    DT::formatRound(columns = 'SMARTRate', digits = 2) |>
+    DT::formatStyle(
+      columns = "SMARTRate", # Column to base the condition on
+      target = "row",     # Apply style to the entire row
+      backgroundColor = DT::styleInterval(c(input$smartThreshold),
+                                          c('white', 'palegreen'))
+    )
   })
   
   
