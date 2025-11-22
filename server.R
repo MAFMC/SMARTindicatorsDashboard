@@ -2,15 +2,15 @@
 
 server <- function(input, output) {
   
-  dummydat <- data.frame(Indicator = c(LETTERS),
-                         Category = c(rep("Economic", 5),
-                                      rep("Social", 2),
-                                      rep("Fish", 9),
-                                      rep("FoodWebBase", 2),
-                                      rep("Habitat", 3),
-                                      rep("Climate", 5)),
-                         SMARTRate = c(runif(26))
-  )
+  # dummydat <- data.frame(Indicator = c(LETTERS),
+  #                        Category = c(rep("Economic", 5),
+  #                                     rep("Social", 2),
+  #                                     rep("Fish", 9),
+  #                                     rep("FoodWebBase", 2),
+  #                                     rep("Habitat", 3),
+  #                                     rep("Climate", 5)),
+  #                        SMARTRate = c(runif(26))
+  # )
   
 # dashboard
   
