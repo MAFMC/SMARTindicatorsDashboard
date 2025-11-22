@@ -2,6 +2,7 @@
 
 server <- function(input, output) {
   
+  # put data in the global section so UI can use it too
   # dummydat <- data.frame(Indicator = c(LETTERS),
   #                        Category = c(rep("Economic", 5),
   #                                     rep("Social", 2),
@@ -90,12 +91,8 @@ server <- function(input, output) {
   })
   
   # output$catts <-  renderPlot({
-  #   min_val <- 1968
-  #   max_val <- 2025
   #   dummydat |>
   #     dplyr::filter(Category == input$selectcat) |>
-  #     dplyr::mutate(StartYear = sample(min_val:(min_val+20), 1),
-  #                   EndYear = sample((max_val-5):max_val, 1)) |>
   #     ggplot2::ggplot(ggplot2::aes(x=Indicator, y))
   # 
   # })
