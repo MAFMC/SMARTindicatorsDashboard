@@ -17,7 +17,7 @@ server <- function(input, output) {
   
   output$ncategories <- renderValueBox({
     # count number of categories in the indicator database.
-    ncategories <- length(unique(dummydat$Category))
+    ncategories <- length(unique(smartratingdat$Category))
 
     valueBox(
       value = formatC(ncategories, digits = 0, format = "f"),
@@ -28,7 +28,7 @@ server <- function(input, output) {
   })
   
   output$nindicators <- renderValueBox({
-    nindicators <- length(unique(dummydat$Indicator))
+    nindicators <- length(unique(smartratingdat$Indicator))
     
     valueBox(
       value = formatC(nindicators, digits = 0, format = "f"),
@@ -39,11 +39,13 @@ server <- function(input, output) {
   })
     
   output$nsmart <- renderValueBox({
-    abovethresh <- dummydat |>
-      dplyr::filter(SMARTRate >= input$smartThreshold)
+    abovethresh <- smartratingdat |>
+      dplyr::filter(Attribute == "OverallRating",
+                    Rating >= input$smartThreshold)
+      #dplyr::filter(SMARTRate >= input$smartThreshold)
     
-    nsmart <- length(abovethresh$SMARTRate)
-    nindicators <- length(unique(dummydat$Indicator))
+    nsmart <- length(abovethresh$Rating)
+    nindicators <- length(unique(smartratingdat$Indicator))
 
     valueBox(
       value = formatC(nsmart, digits = 0, format = "f"),
@@ -54,10 +56,11 @@ server <- function(input, output) {
   })
   
   output$catindcount <- renderPlot({
-    dummydat |>
+    smartratingdat |>
       dplyr::group_by(Category) |>
+      dplyr::filter(Attribute == "OverallRating") |>
       dplyr::summarise(IndCount = n(),
-                       SMARTInds = sum(SMARTRate > input$smartThreshold)) |>
+                       SMARTInds = sum(Rating > input$smartThreshold)) |>
       tidyr::pivot_longer(-Category, names_to = "SMART", values_to = "NumberInds") |>
       ggplot2::ggplot(ggplot2::aes(x = Category, y=NumberInds, fill=SMART)) +
       ggplot2::geom_bar(position="identity", stat = "identity") +
@@ -66,15 +69,17 @@ server <- function(input, output) {
   })
  
   output$smarttable <- renderDataTable({
-    #dummydat
-    DT::datatable(dummydat,
-                  options = list(pageLength = nrow(dummydat),
+    #smartratingdat
+    DT::datatable(smartratingdat |> 
+                    dplyr::filter(Attribute == "OverallRating") |>
+                    dplyr::select(Category, Indicator, SMARTRate = Rating),
+                  options = list(pageLength = nrow(smartratingdat),
                                  dom = 'tipr')) |>
     DT::formatRound(columns = 'SMARTRate', digits = 2) |>
     DT::formatStyle(
       columns = "SMARTRate", # Column to base the condition on
       target = "row",     # Apply style to the entire row
-      backgroundColor = DT::styleInterval(c(input$smartThreshold),
+      backgroundColor = DT::styleInterval(c(input$smartThreshold-0.01),
                                           c('white', 'palegreen'))
     )
   })
@@ -82,18 +87,23 @@ server <- function(input, output) {
 # category statistics
   
   output$catfig <- renderPlot({
-    dummydat |>
-      dplyr::filter(Category == input$selectcat) |>
-      ggplot2::ggplot(ggplot2::aes(x=Indicator, y=SMARTRate)) +
-      ggplot2::geom_bar(stat = "identity") +
+    smartratingdat |>
+      dplyr::filter(Category == input$selectcat,
+                    Attribute %in% c("ElementRating", "OverallRating")) |>
+      ggplot2::ggplot(ggplot2::aes(x=Indicator, y=Rating, fill=Element)) +
+      ggplot2::geom_bar(stat = "identity", position = "dodge") +
       ggplot2::geom_hline(yintercept = input$smartThreshold, colour='palegreen') +
-      ggplot2::ggtitle(paste(input$selectcat))
+      ggplot2::ggtitle(paste(input$selectcat))+
+      ggplot2::coord_flip()
   })
   
   # output$catts <-  renderPlot({
-  #   dummydat |>
+  #   smartratingdat |>
   #     dplyr::filter(Category == input$selectcat) |>
-  #     ggplot2::ggplot(ggplot2::aes(x=Indicator, y))
+  #     ggplot2::ggplot(ggplot2::aes(x=Indicator, y=EndYear)) +
+  #     ggplot2::geom_bar(stat = "identity") +
+  #     ggplot2::coord_flip()
+  # 
   # 
   # })
   

@@ -27,3 +27,5 @@ dummydat <- data.frame(Indicator = c(LETTERS),
                        EndYear = replicate(length(LETTERS), sample((max_val-5):max_val, 1)),
                        EPU = replicate(length(LETTERS), sample(EPUs, size = 1, replace = TRUE))
 )
+
+smartratingdat <- readRDS(url("https://github.com/MAFMC/SMARTindicatorsData/raw/main/data-raw/smartratingdat.rds"))

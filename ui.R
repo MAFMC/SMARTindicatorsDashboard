@@ -46,7 +46,7 @@ dashboardPage(
               fluidRow(
                 box(
                   selectInput("selectcat", label = h3("Select a Category to Display"), 
-                              choices = unique(dummydat$Category), 
+                              choices = unique(smartratingdat$Category), 
                               selected = 1)
                 )
               ),

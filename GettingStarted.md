@@ -1,7 +1,7 @@
 ---
 title: "Getting Started"
 author: "Sarah Gaichas"
-date: "2025-11-21"
+date: "2025-12-04"
 output: 
   html_document:
     mathjax: local
